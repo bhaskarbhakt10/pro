@@ -8,19 +8,18 @@ import Profile from "../pages/profile/Profile";
 
 const Router = () => {
   return (
-    <>
-      <Routerr>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="user" element={<User />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="account" element={<Account />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Routes>
-      </Routerr>
-    </>
+    <Routerr>
+      <Routes>
+        <Route path="/" index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/user">
+          <Route index element={<User />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="account" element={<Account />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+      </Routes>
+    </Routerr>
   );
 };
 
