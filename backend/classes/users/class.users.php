@@ -7,7 +7,7 @@ require_once dirname(__FILE__, 3) . '/database/database.tables.php';
 class Users
 {
 
-    private $database;
+    protected $database;
 
     private $userID;
     private $firstname;

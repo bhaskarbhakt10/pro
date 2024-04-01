@@ -6,10 +6,11 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorizatio
 header('Content-Type: application/json');
 
 require_once dirname(__FILE__ ,2) .'/classes/users/class.users.php';
-// require_once dirname(__FILE__ ,2) .'/classes/database.tables.php';
+require_once dirname(__FILE__ ,2) .'/classes/login/class.login.php';
 
 
 $user = new Users();
+$login = new Login();
 
 $data = json_decode(file_get_contents("php://input"), true);
 

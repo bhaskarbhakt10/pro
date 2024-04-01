@@ -1,27 +1,86 @@
-
-
+import { useState } from "react";
+import axios  from "axios";
 import PasswordInp from "../microcomponents/PasswordInp";
 
+const { VITE_BASE_URL } = import.meta.env;
+
 const LoginForm = () => {
+    const [login, setLogin] = useState({ username: "", password: "" });
+
+    
+
+    const handleLoginInput = (name, value) => {
+        const prevstate = { ...login };
+        prevstate[name] = value;
+        setLogin(prevstate);
+    };
+
+    const handleLogin = async (e) => {
+
+        e.preventDefault();
+
+        try {
+            const response = await axios({
+                method:'POST',
+                url:`${VITE_BASE_URL}controller-login.php`,
+                data: login,
+            });
+            console.log(response.data);
+            
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
 
 
+
+
+     };
 
     return (
         <div className="w-full max-w-sm">
-            <div action="" className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form
+                action=""
+                onSubmit={handleLogin}
+                className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                    <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2"> Username </label>
-                    <input type="tel" name="" id="username" placeholder="Phone Number" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <label
+                        htmlFor="username"
+                        className="block text-gray-700 text-sm font-bold mb-2">
+                        Username
+                    </label>
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        onChange={(e) => handleLoginInput(e.target.name, e.target.value)}
+                        value={login.username}
+                        placeholder="Username, Phone Number or Email"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <PasswordInp />
+                    <label
+                        htmlFor="password"
+                        className="block text-gray-700 text-sm font-bold mb-2">
+                        Password
+                    </label>
+                    <PasswordInp
+                        name={"password"}
+                        id={"password"}
+                        placeholder={"Enter Password"}
+                        value={login.password}
+                        onChange={(e) => handleLoginInput(e.target.name, e.target.value)}
+                    />
                 </div>
                 <div>
-                    <button type="submit" className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 transition-all">Login</button>
+                    <button
+                        type="submit"
+                        className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 transition-all">
+                        Login
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
-    )
-}
+    );
+};
 export default LoginForm;
