@@ -80,6 +80,22 @@ class Users
             return false;
         }
     }
+    public function getUserData($columns, $value)
+    {
+
+        $dataExists = $this->checkUserExists($columns, $value);
+        if($dataExists === true){
+            $sql = "SELECT * FROM " . USER_TABLE . " WHERE " . $columns . "='" . $value . "' AND User_Status=1 ";
+            $results = $this->database->connect()->query($sql);
+            if ($results->num_rows > 0) {
+                while($row = $results->fetch_assoc()){
+                    return $row;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 
     public function InsertUserTable()
     {
