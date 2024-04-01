@@ -1,11 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
 import PasswordInp from "../microcomponents/PasswordInp";
+
+const { VITE_BASE_URL } = import.meta.env;
 
 
 const SignupForm = () => {
 
-
     const [signUpForm, setSignUpForm] = useState({});
+    const [signupStatus, setSignupStatus] = useState({ status: null, msg: null });
 
 
     const handleSignUpInput = (name, value) => {
@@ -16,11 +19,33 @@ const SignupForm = () => {
     }
 
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
 
         e.preventDefault();
 
-        console.log(signUpForm);
+        try {
+            const response = await axios({
+                method: 'POST',
+                url: `${VITE_BASE_URL}controller-signup.php`,
+                data: signUpForm,
+            });
+            console.log(response.data);
+            const { status: s, msg } = response.data;
+            const prevSignupStatus = { ...signupStatus };
+            setSignupStatus({ status: s, msg: msg });
+
+            // console.log(signupStatus);
+            if (s === true) {
+                setSignUpForm({});
+
+            }
+
+
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
 
 
     }
@@ -49,16 +74,18 @@ const SignupForm = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2"> User name * </label>
-                            <input type="text" name="username" id="username" placeholder="Jhon_123" value={signUpForm.username !== undefined ? signUpForm.username : '' } onChange={(e)=> handleSignUpInput(e.target.name, e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input type="text" name="username" id="username" placeholder="Jhon_123" value={signUpForm.username !== undefined ? signUpForm.username : ''} onChange={(e) => handleSignUpInput(e.target.name, e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <PasswordInp name={'password'} id={'password'} placeholder={'Enter Password'}  value={signUpForm.password !== undefined ? signUpForm.password : '' } onChange={(e)=> handleSignUpInput(e.target.name, e.target.value)}  />
+                            <PasswordInp name={'password'} id={'password'} placeholder={'Enter Password'} value={signUpForm.password !== undefined ? signUpForm.password : ''} onChange={(e) => handleSignUpInput(e.target.name, e.target.value)} />
                         </div>
 
                         <div>
                             <button type="submit" className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 transition-all">Login</button>
                         </div>
+                        {signupStatus.status === true && signupStatus.msg}
+                        {signupStatus.status === false && signupStatus.msg}
                     </div>
                 </div>
 

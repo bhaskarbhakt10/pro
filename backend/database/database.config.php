@@ -19,8 +19,35 @@ class Database
         return $this->connection;
     }
 
+
+
+    function CreateTable($tableName, $columns = array())
+    {
+
+        if (!is_array($columns)) {
+            throw new InvalidArgumentException('columns must be an array');
+            return false;
+        }
+
+        $sql = "CREATE TABLE IF NOT EXISTS " . $tableName . " (";
+        foreach ($columns as $col) {
+
+            $sql .= $col . ", ";
+        }
+        $sql = rtrim($sql, ', ');
+        $sql .= ")";
+        $result = $this->connect()->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            echo "Error creating table: " . $this->connect()->error;
+            return false;
+        }
+    }
     function __destruct()
     {
         return $this->connection->close();
     }
+
+   
 }
