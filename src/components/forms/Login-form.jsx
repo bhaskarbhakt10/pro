@@ -2,11 +2,15 @@ import { useState } from "react";
 import axios  from "axios";
 import PasswordInp from "../microcomponents/PasswordInp";
 
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../features/login/loginSlice";
+
 const { VITE_BASE_URL } = import.meta.env;
 
 const LoginForm = () => {
     const [login, setLogin] = useState({ username: "", password: "" });
 
+    const dispatch = useDispatch();
     
 
     const handleLoginInput = (name, value) => {
@@ -25,7 +29,13 @@ const LoginForm = () => {
                 url:`${VITE_BASE_URL}controller-login.php`,
                 data: login,
             });
-            console.log(response.data);
+            
+            const { status } = response.data;
+
+            if(status){
+                
+                dispatch(loginUser(status))
+            }
             
         } catch (error) {
             console.error('Error fetching data:', error);
