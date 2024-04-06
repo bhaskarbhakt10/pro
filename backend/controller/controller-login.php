@@ -37,6 +37,17 @@ if (isset($_POST)) {
 
         $responseArray['status'] = $loggedIn['status'];
         $responseArray['msg'] = $loggedIn['msg'];
+
+        if($loggedIn['status'] === true){
+
+            
+            $responseArray['ID'] = $login->getLogInInfo('User_ID');
+            $responseArray['f_name'] = $login->getLogInInfo('User_Firstname');
+            $responseArray['l_name'] = $login->getLogInInfo('User_Lastname');
+            $responseArray['phone_no'] = $login->getLogInInfo('User_PhoneNo');
+            $responseArray['email'] = $login->getLogInInfo('User_Email');
+            $responseArray['u_name'] = $login->getLogInInfo('User_Username');
+        }
     }
 
     echo json_encode($responseArray);

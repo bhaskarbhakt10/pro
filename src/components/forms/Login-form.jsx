@@ -1,9 +1,11 @@
 import { useState } from "react";
-import axios  from "axios";
+import axios from "axios";
 import PasswordInp from "../microcomponents/PasswordInp";
 
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../features/login/loginSlice";
+
+import { useNavigate } from "react-router-dom";
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -11,7 +13,8 @@ const LoginForm = () => {
     const [login, setLogin] = useState({ username: "", password: "" });
 
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
+
 
     const handleLoginInput = (name, value) => {
         const prevstate = { ...login };
@@ -23,20 +26,43 @@ const LoginForm = () => {
 
         e.preventDefault();
 
+        localStorage.setItem('logged', false);
+
+
         try {
             const response = await axios({
-                method:'POST',
-                url:`${VITE_BASE_URL}controller-login.php`,
+                method: 'POST',
+                url: `${VITE_BASE_URL}controller-login.php`,
                 data: login,
             });
-            
-            const { status } = response.data;
 
-            if(status){
-                
-                dispatch(loginUser(status))
+
+
+            const { status, ID, email, f_name, l_name, u_name, phone_no } = response.data;
+
+
+            if (status) {
+
+                const UserInfo = {
+                    ID: ID,
+                    email: email,
+                    f_name: f_name,
+                    l_name: l_name,
+                    u_name: u_name,
+                    phone_no: phone_no,
+                }
+                // console.log(UserInfo);
+                localStorage.setItem('logged', true);
+                dispatch(loginUser(UserInfo))
+                return navigate('/user/dashboard');
+
             }
-            
+            else {
+
+                localStorage.setItem('logged', false);
+
+            }
+
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -44,7 +70,7 @@ const LoginForm = () => {
 
 
 
-     };
+    };
 
     return (
         <div className="w-full max-w-sm">

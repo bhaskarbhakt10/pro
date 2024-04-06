@@ -51,4 +51,18 @@ class Login extends Users
             }
         }
     }
+
+    function getLogInInfo($colname){
+        $sql = "SELECT * FROM " . USER_TABLE ." WHERE User_Username='".$this->username."' AND User_Status=1";
+        $results = $this->database->connect()->query($sql);
+        if($results -> num_rows > 0){
+            while($row = $results->fetch_assoc()){
+                return $row[$colname];
+            }
+        }
+        
+    
+    }
+
 }
+
