@@ -19,20 +19,20 @@ const DashboardNav = () => {
                                 <span className="menu-item-icon">
                                     <MdSpeed />
                                 </span>
-                                <span className="menu-item-name">
+                                <span className="menu-item-name" >
                                     Dashboard
                                 </span>
                             </Link></li>
                             <li> <Link to="/user/profile">
-                                
+
                                 <span className="menu-item-icon">
                                     <CgProfile />
                                 </span>
                                 <span className="menu-item-name">
                                     Profile
                                 </span>
-                                </Link></li>
-                            <li> <Link to="/user/profile">Edit Card</Link></li>
+                            </Link></li>
+                            <li> <Link to="/user/card">Edit Card</Link></li>
                             <li> <Logout /> </li>
                         </ul>
                     </nav>

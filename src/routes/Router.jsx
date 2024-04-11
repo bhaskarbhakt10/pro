@@ -7,6 +7,7 @@ import Account from "../pages/account/Account";
 import Profile from "../pages/profile/Profile";
 
 import PrivateRoutes from "./PrivateRoutes";
+import Card from "../pages/card/Card";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="account" element={<Account />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="card" element={<Card />} />
           </Route>
         </Route>
       </Routes>
