@@ -38,7 +38,7 @@ const LoginForm = () => {
 
 
 
-            const { status, ID, email, f_name, l_name, u_name, phone_no } = response.data;
+            const { status, ID, email, f_name, l_name, u_name, phone_no, token } = response.data;
 
 
             if (status) {
@@ -53,6 +53,9 @@ const LoginForm = () => {
                 }
                 // console.log(UserInfo);
                 localStorage.setItem('logged', true);
+                localStorage.setItem('phone', phone_no);
+                localStorage.setItem('id', ID);
+                localStorage.setItem('token', token);
                 dispatch(loginUser(UserInfo))
                 return navigate('/user/dashboard');
 

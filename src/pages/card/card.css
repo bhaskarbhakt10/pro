@@ -1,0 +1,17 @@
+.main-form {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    padding: 0 1.5rem;
+}
+
+.form-body {
+    flex: 0 0 70%;
+    height: 100vh;
+    overflow-x: scroll;
+}
+
+.preview-body {
+    flex: 0 0 30%;
+}
+

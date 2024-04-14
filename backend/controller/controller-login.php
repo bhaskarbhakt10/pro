@@ -47,6 +47,7 @@ if (isset($_POST)) {
             $responseArray['phone_no'] = $login->getLogInInfo('User_PhoneNo');
             $responseArray['email'] = $login->getLogInInfo('User_Email');
             $responseArray['u_name'] = $login->getLogInInfo('User_Username');
+            $responseArray['token'] = md5(time());
         }
     }
 

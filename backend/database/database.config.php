@@ -44,6 +44,7 @@ class Database
             return false;
         }
     }
+    
     function __destruct()
     {
         return $this->connection->close();

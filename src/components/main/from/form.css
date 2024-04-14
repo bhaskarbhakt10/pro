@@ -41,3 +41,49 @@ p{
 .height100{
     height: 100%;
 }
+.flex-row{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 25px;
+}
+
+.col-md-12{
+    flex:  0 0 100%;
+}
+.col-md-6{
+    flex:  0 0 48%;
+}
+.col-md-3 {
+    flex: 0 0 22%;
+}
+.col-md-4 {
+    flex: 0 0 30%;
+}
+.input-group{
+    position: relative;
+    display: flex;
+}
+.input-group-text {
+    display: flex;
+    height: 100%;
+    border-radius: 0 5px 5px 0;
+    background: #ccc;
+    top: 0;
+    position: absolute;
+    right: 0;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+}
+
+h2.sub-heading {
+    font-size: 30px;
+    line-height: 1.4;
+    padding: 1rem 0;
+   
+}
+.more-inputs-wrapper{
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+
+}
