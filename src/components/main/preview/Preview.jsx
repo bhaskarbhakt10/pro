@@ -23,9 +23,9 @@ function Preview(props) {
 
   const social_icons = { facebook: <FaFacebook />, twitter: <BsTwitterX />, instagram: <BsInstagram />, linkedin: <BsLinkedin />, github: <BsGithub />, youtube: <BsYoutube /> };
 
-  // const { info, size, color } = props.someInfo;
+  const { info, size, color } = props.someInfo;
 
-  // console.warn(props.someInfo.info);
+  console.warn(info);
 
   let { logo, tagline, tagline_align, tagline_bg, socialMedia, mainBody, mainBodyMetaData } = props;
   console.log(socialMedia);

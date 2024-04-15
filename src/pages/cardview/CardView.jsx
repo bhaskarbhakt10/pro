@@ -22,7 +22,7 @@ const CardView = () => {
         const data = await ReadCardDB(phonenumber);
 
        
-        console.log(data);
+        // console.log(data);
 
         if (data !== false) {
             setimageUrl(data[1]);
@@ -38,7 +38,7 @@ const CardView = () => {
         fetchData();
     }, [phonenumber]);
 
-    console.log(viewCard);
+    // console.log(viewCard);
 
     return (
         <>
@@ -96,6 +96,7 @@ const CardView = () => {
                     mainBody={viewCard.main_body}
                     mainBodyMetaData={viewCard.mainBodyMetaData}
                     socialMedia={viewCard.social_media}
+                    someInfo={viewCard.someInfo}
 
                 />}
             </div>
